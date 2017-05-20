@@ -36,6 +36,66 @@ let user = document.head.querySelector('meta[name="user"]');
 
 If you use Laravel default Laravel scaffolding (see command make:auth https://laravel.com/docs/5.4/authentication#introduction) you have to only done litle changes tho the existing files.
 
+You can also publish only permissions and/or roles if you don't want to expose all user object to javascript with something like:
+
+```javascript
+<script>
+    window.Laravel = {!! json_encode([
+        'csrfToken' => csrf_token(),
+        'roles' => Auth::user()->roles
+    ]) !!};
+</script
+```
+Laravep permission package don't expose by default roles and permissions in Json serialization of user object so you have to apply the following changes to App\User class (apply a Trait):
+
+```php
+Trait ExposePermissions
+   ....
+   /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['all_permissions','can'];
+    
+   /**
+     * Get all user permissions.
+     *
+     * @return bool
+     */
+    public function getAllPermissionsAttribute()
+    {
+        return $this->getAllPermissions();
+    }
+    
+    /**
+     * Get all user permissions in a flat javascript array
+     *
+     * @return bool
+     */
+    public function getPermissionsAttribute()
+    {
+        
+    }
+    
+     /**
+     * Get all user permissions in a flat array.
+     *
+     * @return array
+     */
+    public function getCanAttribute()
+    {
+        $permissions = [];
+        foreach (Permission::all() as $permission) {
+            if (Auth::user()->can($permission->name)) {
+                $permissions[$permission->name] = true;
+            } else {
+                $permissions[$permission->name] = false;
+            }
+        }
+        return $permissions;
+    }
+```
 
 ## Front-end
 
