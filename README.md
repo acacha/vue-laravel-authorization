@@ -8,7 +8,9 @@ This is a guide of how to use Laravel Authorization (https://laravel.com/docs/5.
 
 Install laravel-permission package. See https://github.com/spatie/laravel-permission#installation.
 
-Add Laravel user object to Javascript with the following javascript snippet in your html header:
+Add Laravel user object to Javascript with the following javascript snippet in your html header, multiple ways of doing this:
+
+Before Laravel 5.4.23 a window.Laravel global javascript object exists, you could add user to this object using:
 
 ```javascript
 <script>
@@ -19,7 +21,21 @@ Add Laravel user object to Javascript with the following javascript snippet in y
 </script>
 ```
 
-If you use Laravel default Laravel scaffolding (see command make:auth https://laravel.com/docs/5.4/authentication#introduction) 
+Or Like in 5.4.23 and before you can use meta tags:
+
+```html
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="user" content="Auth::user()">
+```
+
+and in bootstrap.js or similar file done something like:
+
+```javascript
+let user = document.head.querySelector('meta[name="user"]');
+```
+
+If you use Laravel default Laravel scaffolding (see command make:auth https://laravel.com/docs/5.4/authentication#introduction) you have to only done litle changes tho the existing files.
+
 
 ## Front-end
 
