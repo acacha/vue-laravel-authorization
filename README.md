@@ -43,7 +43,7 @@ We want to use Laravel permission package roles and permissions in Javascript wi
 
 ```javascript
 <h1 v-if="Laravel.user.permission['manage users']">You have permission to manage users</h1>
-<h1 v-else>You don\'t have permission to manage users</h1>
+<h1 v-else>You dont have permission to manage users</h1>
 
 ```
 
@@ -51,7 +51,7 @@ Example with roles:
 
 ```javascript
 <h1 v-if="Laravel.user.roles['manager']">You have the role manager</h1>
-<h1 v-else>You don\'t have the role manager</h1>
+<h1 v-else>You dont have the role manager</h1>
 ```
 
 # Security note
