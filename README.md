@@ -6,7 +6,20 @@ This is a guide of how to use Laravel Authorization (https://laravel.com/docs/5.
 
 ## Backend
 
-Install laravel-permission package. See https://github.com/spatie/laravel-permission#installation .
+Install laravel-permission package. See https://github.com/spatie/laravel-permission#installation.
+
+Add Laravel user object to Javascript with the following javascript snippet in your html header:
+
+```javascript
+<script>
+    window.Laravel = {!! json_encode([
+        'csrfToken' => csrf_token(),
+        'user' => Auth::user()
+    ]) !!};
+</script>
+```
+
+If you use Laravel default Laravel scaffolding (see command make:auth https://laravel.com/docs/5.4/authentication#introduction) 
 
 ## Front-end
 
