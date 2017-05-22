@@ -68,16 +68,6 @@ Trait ExposePermissions
         return $this->getAllPermissions();
     }
     
-    /**
-     * Get all user permissions in a flat javascript array
-     *
-     * @return bool
-     */
-    public function getPermissionsAttribute()
-    {
-        
-    }
-    
      /**
      * Get all user permissions in a flat array.
      *
