@@ -51,12 +51,7 @@ Laravep permission package don't expose by default roles and permissions in Json
 ```php
 Trait ExposePermissions
    ....
-   /**
-     * The accessors to append to the model's array form.
-     *
-     * @var array
-     */
-    protected $appends = ['all_permissions','can'];
+   
     
    /**
      * Get all user permissions.
@@ -85,6 +80,17 @@ Trait ExposePermissions
         }
         return $permissions;
     }
+```
+
+At the trait to you User Model and appends the attributes to json:
+
+```php
+/**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['all_permissions','can']
 ```
 
 ## Front-end
