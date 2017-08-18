@@ -72,11 +72,7 @@ Trait ExposePermissions
     {
         $permissions = [];
         foreach (Permission::all() as $permission) {
-            if (Auth::user()->can($permission->name)) {
-                $permissions[$permission->name] = true;
-            } else {
-                $permissions[$permission->name] = false;
-            }
+            $permissions[$permission->name] = (bool)(Auth::user()->can($permission->name));
         }
         return $permissions;
     }
