@@ -46,7 +46,7 @@ You can also publish only permissions and/or roles if you don't want to expose a
     ]) !!};
 </script
 ```
-Laravep permission package don't expose by default roles and permissions in Json serialization of user object so you have to apply the following changes to App\User class (apply a Trait):
+Laravel permission package don't expose by default roles and permissions in Json serialization of user object so you have to apply the following changes to App\User class (apply a Trait):
 
 ```php
 Trait ExposePermissions
