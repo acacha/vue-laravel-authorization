@@ -21,7 +21,7 @@ Before Laravel 5.4.23 a window.Laravel global javascript object exists, you coul
 </script>
 ```
 
-Or Like in 5.4.23 and before you can use meta tags:
+Or Like in 5.4.23 and after you can use meta tags:
 
 ```html
     <meta name="csrf-token" content="{{ csrf_token() }}">
