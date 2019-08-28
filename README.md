@@ -17,10 +17,17 @@ In 5.4.23 and later you can use meta tags:
     <meta name="user" content="{{ Auth::user() }}">
 ```
 
-and in bootstrap.js or similar file done something like:
+and in your Vue component do something like this:
 
 ```javascript
-window.user = JSON.parse(document.head.querySelector('meta[name="user"]').content);
+export default {
+    data() {
+        return {
+            user: JSON.parse(document.head.querySelector('meta[name="user"]').content)
+        }
+    },
+// rest of component
+}
 ```
 
 If you use Laravel default Laravel scaffolding (see command make:auth https://laravel.com/docs/5.8/authentication) you have to only done litle changes tho the existing files.
