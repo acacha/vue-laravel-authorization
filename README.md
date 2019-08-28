@@ -8,45 +8,31 @@ This is a guide of how to use Laravel Authorization (https://laravel.com/docs/5.
 
 Install laravel-permission package. See https://github.com/spatie/laravel-permission#installation.
 
-Add Laravel user object to Javascript with the following javascript snippet in your html header, multiple ways of doing this:
+Add Laravel user object to Javascript with the following javascript snippet in your html header:
 
-Before Laravel 5.4.23 a window.Laravel global javascript object exists, you could add user to this object using:
-
-```javascript
-<script>
-    window.Laravel = {!! json_encode([
-        'csrfToken' => csrf_token(),
-        'user' => Auth::user()
-    ]) !!};
-</script>
-```
-
-Or Like in 5.4.23 and before you can use meta tags:
+In 5.4.23 and later you can use meta tags:
 
 ```html
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="user" content="Auth::user()">
+    <meta name="user" content="{{ Auth::user() }}">
 ```
 
 and in bootstrap.js or similar file done something like:
 
 ```javascript
-let user = document.head.querySelector('meta[name="user"]');
+window.user = JSON.parse(document.head.querySelector('meta[name="user"]').content);
 ```
 
-If you use Laravel default Laravel scaffolding (see command make:auth https://laravel.com/docs/5.4/authentication#introduction) you have to only done litle changes tho the existing files.
+If you use Laravel default Laravel scaffolding (see command make:auth https://laravel.com/docs/5.8/authentication) you have to only done litle changes tho the existing files.
 
 You can also publish only permissions and/or roles if you don't want to expose all user object to javascript with something like:
 
-```javascript
-<script>
-    window.Laravel = {!! json_encode([
-        'csrfToken' => csrf_token(),
-        'roles' => Auth::user()->roles
-    ]) !!};
-</script
+```html
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="user" content="{{ Auth::user() }}">
 ```
-Laravep permission package don't expose by default roles and permissions in Json serialization of user object so you have to apply the following changes to App\User class (apply a Trait):
+
+Larave permission package don't expose by default roles and permissions in Json serialization of user object so you have to apply the following changes to App\User class (apply a Trait):
 
 ```php
 Trait ExposePermissions
